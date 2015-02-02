@@ -18,6 +18,9 @@
 				console.log(res.err);
 			} else {
 				// console.log(res.memory);
+				$("#memoriesList").append("<h3>" + res.memory.timestamp + "</h3>");
+				$("#memoriesList").append("<p>" + res.memory.memoryText + "</p>");
+				$("#memoryText").val("");
 			}
 		});
 	};
@@ -36,9 +39,14 @@
 </div>
 <button class="btn btn-default" onclick="saveMemory(this)">Save Memory</button>
 
+<div id="memoriesList">
+	<% for(i = 0; i < memories.length; i++) { %>
 
+	<h3><%= memories[i].timestamp %></h3>
+	<p><%= memories[i].memoryText %></p>
 
-
+	<% } %>
+</div>
 
 <script src="js/jquery-1.11.1.js"></script>
 <script src="js/js/bootstrap.js"></script>

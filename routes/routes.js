@@ -18,7 +18,22 @@ var init = function(memories, callback) {
 }
 
 var getHome = function(req, res) {
-	res.render('home.ejs', {});
+	memories = {};
+	memoriesDB.getSet('ea', function(err, data) {
+		if (err) {
+			logger.error(err);
+		} else {
+			memories = data;
+			if (data == null) {
+				memories = [];
+			} else {
+				for (i=0; i < memories.length; i++) {
+					memories[i] = JSON.parse(memories[i]);
+				}
+			}
+			res.render('home.ejs', {memories: memories});
+		}
+	});
 }
 
 var ajaxSaveMemory = function(req, res) {
