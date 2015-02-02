@@ -1,0 +1,26 @@
+{
+   "name": "memory",
+   "repository": "github.com/nflethana/memory",
+   "description": "trial",
+   "version": "0.0.1",
+   "scripts": {
+     "start": "node app.js"
+   },
+   "dependencies": {
+      "express": "4.x",
+      "ejs": "*",
+      "ejs-locals": "*",
+      "body-parser": "*",
+      "cookie-parser": "*",
+      "express-session": "*",
+      "aws-sdk": "*",
+      "async": "*",
+      "crypto": "*",
+      "lru-cache": "2.5.x",
+      "async": "*",
+      "crypto-js": "*",
+      "node-uuid": "*",
+      "tracer": "*",
+      "nodemon": "*"
+   }
+}

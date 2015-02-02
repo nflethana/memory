@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<!-- Import non-minified Bootstrap files for debugging -->
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<!-- <script type="text/javascript" src="js/saveMemory.js"></script> -->
+
+<script type="text/javascript">
+	var saveMemory = function(mem) {
+		memory = $(mem);
+		var data = {};
+		data.memoryText = $("#memoryText").val();
+		data.timestamp = new Date();
+		// console.log(data.memoryText);
+		$.post('ajax/savememory/', data, function(res) {
+			if (res.err) {
+				console.log(res.err);
+			} else {
+				// console.log(res.memory);
+			}
+		});
+	};
+</script>
+
+<title>Memories</title>
+
+</head>
+
+<body>
+
+
+<div class="input-group">
+	<label for="memoryText">Memory Description</label>
+	<textarea class="form-control" rows="3" id="memoryText" placeholder="It all started..."></textarea>
+</div>
+<button class="btn btn-default" onclick="saveMemory(this)">Save Memory</button>
+
+
+
+
+
+<script src="js/jquery-1.11.1.js"></script>
+<script src="js/js/bootstrap.js"></script>
+</body>
+
+
+</html>
