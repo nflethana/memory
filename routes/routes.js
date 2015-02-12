@@ -20,35 +20,43 @@ var init = function(memories, polls, callback) {
 }
 
 var getHome = function(req, res) {
-	memories = {};
-	memoriesDB.getSet('ea', function(err, data) {
-		if (err) {
-			logger.error(err);
-		} else {
-			memories = data;
-			if (data == null) {
-				memories = [];
-			} else {
-				for (i=0; i < memories.length; i++) {
-					memories[i] = JSON.parse(memories[i]);
-				}
-			}
-			res.render('home.ejs', {memories: memories});
+	// memories = {};
+	// memoriesDB.getSet('ea', function(err, data) {
+	// 	if (err) {
+	// 		logger.error(err);
+	// 	} else {
+	// 		memories = data;
+	// 		if (data == null) {
+	// 			memories = [];
+	// 		} else {
+	// 			for (i=0; i < memories.length; i++) {
+	// 				memories[i] = JSON.parse(memories[i]);
+	// 			}
+	// 		}
+	// 		res.render('home.ejs', {memories: memories});
+	// 	}
+	// });
+
+	pollsDB.scanKeys(function(err, keys) {
+		if (err) logger.error(err);
+		else {
+			logger.info(keys);
+			res.render('home.ejs', {PollQuestions: keys});
 		}
 	});
 }
 
 var ajaxSavePoll = function(req, res) {
 	// logger.info("in here");
-	// logger.info(req.body);
-	var memory = req.body;
-	memoriesDB.addToSet("ea", JSON.stringify(memory), function(err, data) {
+	logger.info(req.body);
+	var poll = req.body;
+	pollsDB.addToSet(poll.question, JSON.stringify(poll), function(err, data) {
 		if (err) {
 			logger.error(err);
 		} else {
 			response = {};
 			response.err = false;
-			response.memory = memory;
+			response.poll = poll;
 			res.send(response);
 		}
 	});

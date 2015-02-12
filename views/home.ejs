@@ -7,22 +7,20 @@
 <!-- <script type="text/javascript" src="js/saveMemory.js"></script> -->
 
 <script type="text/javascript">
-	var saveMemory = function(mem) {
-		memory = $(mem);
+	var savePoll = function(poll) {
+		poll = $(poll);
 		var data = {};
-		data.memoryText = $("#memoryText").val();
+		data.question = $("#pollTitleText").val();
+		data.firstResponse = $("#pollFirstResponseText").val();
+		data.secondResponse = $("#pollSecondResponseText").val();
 		data.timestamp = new Date();
-		// console.log(data.memoryText);
-		$.post('ajax/savememory/', data, function(res) {
-			if (res.err) {
-				console.log(res.err);
-			} else {
-				// console.log(res.memory);
-				$("#memoriesList").append("<h3>" + res.memory.timestamp + "</h3>");
-				$("#memoriesList").append("<p>" + res.memory.memoryText + "</p>");
-				$("#memoryText").val("");
+		$.post('ajax/savepoll', data, function(res) {
+			if (res.err) console.log(res);
+			else {
+				alert("Poll Saved!");
 			}
 		});
+
 	};
 </script>
 
@@ -34,23 +32,35 @@
 
 
 <div class="input-group">
-	<label for="memoryText">Memory Description</label>
-	<textarea class="form-control" rows="3" id="memoryText" placeholder="[Enter Poll Title Here]"></textarea>
+	<label id="pollTitleLabel">Enter Poll Title:</label>
+	<input class="form-control" rows="3" id="pollTitleText" placeholder="[Enter Poll Title Here]" aria-describedby="pollTitleLabel"></input>
 </div>
-<button class="btn btn-default" onclick="saveMemory(this)">Save Memory</button>
 
-<div id="memoriesList">
-	<% for(i = 0; i < memories.length; i++) { %>
+<div class="input-group">
+	<label id="pollFirstResponseLabel">Enter First Response:</label>
+	<input class="form-control" rows="3" id="pollFirstResponseText" placeholder="[Enter First Response Here]" aria-describedby="pollFirstResponseLabel"></input>
+</div>
+<div class="input-group">
+	<label id="pollSecondResponseLabel">Enter Second Response:</label>
+	<input class="form-control" rows="3" id="pollSecondResponseText" placeholder="[Enter Second Response Here]" aria-describedby="pollSecondResponseLabel"></input>
+</div>
 
-	<h3><%= memories[i].timestamp %></h3>
-	<p><%= memories[i].memoryText %></p>
+<br>
+<button class="btn btn-default" onclick="savePoll(this)">Create Poll</button>
 
+<br>
+<br>
+<div id="pollList">
+<% if (PollQuestions) {
+	for (i = 0; i < PollQuestions.length; i++) { %>
+		<p><%= PollQuestions[i] %></p>
 	<% } %>
+<% } %>
 </div>
 
-<script src="js/jquery-1.11.1.js"></script>
-<script src="js/js/bootstrap.js"></script>
 </body>
 
+<script src="js/jquery-1.11.2.js"></script>
+<script src="js/bootstrap.js"></script>
 
 </html>
