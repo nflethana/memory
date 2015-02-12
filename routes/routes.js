@@ -40,7 +40,7 @@ var getHome = function(req, res) {
 	pollsDB.scanKeys(function(err, keys) {
 		if (err) logger.error(err);
 		else {
-			logger.info(keys);
+			// logger.info(keys);
 			res.render('home.ejs', {PollQuestions: keys});
 		}
 	});
@@ -48,7 +48,7 @@ var getHome = function(req, res) {
 
 var ajaxSavePoll = function(req, res) {
 	// logger.info("in here");
-	logger.info(req.body);
+	// logger.infod(req.body);
 	var poll = req.body;
 	pollsDB.addToSet(poll.question, JSON.stringify(poll), function(err, data) {
 		if (err) {
@@ -62,6 +62,15 @@ var ajaxSavePoll = function(req, res) {
 	});
 }
 
+var getPoll = function(req, res) {
+	pollsDB.getSet(req.params.question, function(err, data) { 
+		if (err) logger.info(err);
+		else {
+			res.render("poll.ejs", {Polls: data})
+		}
+	});
+}
+
 //====================================================
 //	Define Routing Functions
 //====================================================
@@ -69,6 +78,7 @@ var ajaxSavePoll = function(req, res) {
 var routes = {
 	init: init,
 	getHome: getHome,
-	ajaxSavePoll: ajaxSavePoll
+	ajaxSavePoll: ajaxSavePoll,
+	getPoll: getPoll
 };
 module.exports = routes;

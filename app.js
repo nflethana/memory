@@ -43,6 +43,7 @@ polls.init(function() {
 		// app.post('/ajax/saveMemory', routes.ajaxSaveMemory);
 		app.get('/', routes.getHome);
 		app.post('/ajax/savePoll', routes.ajaxSavePoll);
+		app.get('/poll/:question', routes.getPoll);
 
 		//====================================================
 		//	Run the Server
