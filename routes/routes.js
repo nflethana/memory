@@ -10,9 +10,11 @@ var db = require('../models/KVstore.js');
 //	Handle First Step for User Connections
 //====================================================
 var memoriesDB;
+var pollsDB;
 
-var init = function(memories, callback) {
+var init = function(memories, polls, callback) {
 	memoriesDB = memories;
+	pollsDB = polls;
 
 	callback();
 }
@@ -36,7 +38,7 @@ var getHome = function(req, res) {
 	});
 }
 
-var ajaxSaveMemory = function(req, res) {
+var ajaxSavePoll = function(req, res) {
 	// logger.info("in here");
 	// logger.info(req.body);
 	var memory = req.body;
@@ -59,6 +61,6 @@ var ajaxSaveMemory = function(req, res) {
 var routes = {
 	init: init,
 	getHome: getHome,
-	ajaxSaveMemory: ajaxSaveMemory
+	ajaxSavePoll: ajaxSavePoll
 };
 module.exports = routes;

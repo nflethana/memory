@@ -30,15 +30,19 @@ app.use(session({
 var aws = require("./models/KVstore.js");
 
 var memories = new aws('memories')
+var polls = new aws('polls')
 
 memories.init(function() {
+polls.init(function() {
 
 	//====================================================
 	//	Routes Setup
 	//====================================================
-	routes.init(memories, function() {
-		app.get('/ea', routes.getHome);
-		app.post('/ajax/saveMemory', routes.ajaxSaveMemory);
+	routes.init(memories, polls, function() {
+		// app.get('/ea', routes.getHome);
+		// app.post('/ajax/saveMemory', routes.ajaxSaveMemory);
+		app.get('/', routes.getHome);
+		app.post('/ajax/savePoll', routes.ajaxSavePoll);
 
 		//====================================================
 		//	Run the Server
@@ -48,4 +52,5 @@ memories.init(function() {
 		console.log('Server on ' + app.get('port') + ' ===========================');
 	});
 
+});
 });
