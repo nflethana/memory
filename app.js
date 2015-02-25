@@ -44,6 +44,7 @@ polls.init(function() {
 		app.get('/', routes.getHome);
 		app.post('/ajax/savePoll', routes.ajaxSavePoll);
 		app.get('/poll/:question', routes.getPoll);
+		app.get('/vote/:poll/:response', routes.getVote);
 
 		//====================================================
 		//	Run the Server

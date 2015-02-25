@@ -20,23 +20,6 @@ var init = function(memories, polls, callback) {
 }
 
 var getHome = function(req, res) {
-	// memories = {};
-	// memoriesDB.getSet('ea', function(err, data) {
-	// 	if (err) {
-	// 		logger.error(err);
-	// 	} else {
-	// 		memories = data;
-	// 		if (data == null) {
-	// 			memories = [];
-	// 		} else {
-	// 			for (i=0; i < memories.length; i++) {
-	// 				memories[i] = JSON.parse(memories[i]);
-	// 			}
-	// 		}
-	// 		res.render('home.ejs', {memories: memories});
-	// 	}
-	// });
-
 	pollsDB.scanKeys(function(err, keys) {
 		if (err) logger.error(err);
 		else {
@@ -66,7 +49,17 @@ var getPoll = function(req, res) {
 	pollsDB.getSet(req.params.question, function(err, data) { 
 		if (err) logger.info(err);
 		else {
-			res.render("poll.ejs", {Polls: data})
+			// logger.iObject.prototype.toString.call( someVar ) === '[object Array]';
+			parsedData = []
+			if (data) {
+				for (obj in data) {
+					// logger.info("first one");
+					parsedData.push(JSON.parse(data[obj]));
+				}
+			} else {
+				parsedData.push(JSON.parse(data));
+			}
+			res.render("poll.ejs", {Polls: parsedData});
 		}
 	});
 }
@@ -79,6 +72,7 @@ var routes = {
 	init: init,
 	getHome: getHome,
 	ajaxSavePoll: ajaxSavePoll,
-	getPoll: getPoll
+	getPoll: getPoll,
+	getVote: getVote
 };
 module.exports = routes;

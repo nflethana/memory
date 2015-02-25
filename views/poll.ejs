@@ -4,6 +4,7 @@
 <head>
 <!-- Import non-minified Bootstrap files for debugging -->
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="css/bootstrap-theme.css" type="text/css">
 
 <script type="text/javascript">
 </script>
@@ -14,7 +15,14 @@
 
 <body>
 
-<%= Polls %>
+<% for (i in Polls) { %>
+
+	<h1><%= Polls[i].question %></h1>
+	<button type="button" class="btn btn-default" arial-label="Left Align"><h2><%= Polls[i].firstResponse %></h2></button><br>
+	<button type="button" class="btn btn-default" arial-label="Left Align"><h2><%= Polls[i].secondResponse %></h2></button>
+	<h3><%= Polls[i].timestamp %></h3>
+
+<% } %>
 
 </body>
 

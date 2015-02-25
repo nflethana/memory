@@ -4,6 +4,7 @@
 <head>
 <!-- Import non-minified Bootstrap files for debugging -->
 <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="css/bootstrap-theme.css" type="text/css">
 <!-- <script type="text/javascript" src="js/saveMemory.js"></script> -->
 
 <script type="text/javascript">
@@ -53,7 +54,7 @@
 <div id="pollList">
 <% if (PollQuestions) {
 	for (i = 0; i < PollQuestions.length; i++) { %>
-		<p><%= PollQuestions[i] %></p>
+		<a href="/poll/<%= PollQuestions[i] %>"><%= PollQuestions[i] %></a><br>
 	<% } %>
 <% } %>
 </div>
