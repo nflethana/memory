@@ -15,14 +15,18 @@
 
 <body>
 
-<% for (i in Polls) { %>
+<h1>Voting for this: <%= Response %></h1>
 
-	<h1><%= Polls[i].question %></h1>
-	<button type="button" class="btn btn-default" arial-label="Left Align"><h2><%= Polls[i].firstResponse %></h2></button><br>
-	<button type="button" class="btn btn-default" arial-label="Left Align"><h2><%= Polls[i].secondResponse %></h2></button>
-	<h3><%= Polls[i].timestamp %></h3>
+<h1>On this Poll: <%= Poll %></h1>
 
-<% } %>
+<div class="input-group">
+  <span class="input-group-addon">¢</span>
+  <input type="text" class="form-control" aria-label="Charitable Donation">
+  <span class="input-group-btn">
+        <button class="btn btn-default" type="button">Donate and Vote!</button>
+  </span>
+</div>
+
 
 </body>
 

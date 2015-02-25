@@ -64,6 +64,11 @@ var getPoll = function(req, res) {
 	});
 }
 
+var getVote = function(req, res) {
+	// logger.info(req.params);
+	res.render('vote.ejs', {Poll: req.params.poll, Response: req.params.response})
+}
+
 //====================================================
 //	Define Routing Functions
 //====================================================
